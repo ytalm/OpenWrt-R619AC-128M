@@ -80,11 +80,11 @@ jobs:
         mv openwrt/* . && rm -rf openwrt
 
     - name: 下载feeds  Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run:  ./scripts/feeds update -a 
 
     - name: 安装feeds跟自定义插件  Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
-
+      run:  ./scripts/feeds install -a
+     
     - name: 加载diy.config设置  Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
