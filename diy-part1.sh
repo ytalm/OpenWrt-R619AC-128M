@@ -14,7 +14,7 @@
 
 # 使用源码自带ShadowSocksR Plus+出国软件 fw876/helloworld
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-sed -i '$a src-git jerrykuku https://github.com/jerrykuku/luci-app-vssr.git' feeds.conf.default                    #luci-app-vssr <M>
+#sed -i '$a src-git jerrykuku https://github.com/jerrykuku/luci-app-vssr.git' feeds.conf.default                    #luci-app-vssr <M>
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld.git                                                   #luci-app-ssr-plus
 
 # Add a feed source
