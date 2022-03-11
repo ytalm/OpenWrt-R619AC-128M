@@ -79,7 +79,25 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         mv openwrt/* . && rm -rf openwrt
    
-    - name: FilePatch
+    - name: 安装自定义文件包  Update packages
+      env:
+        SCKEY: ${{ secrets.ACTIONS_TRIGGER_PAT }}
+      run: |
+        ls
+        cd package
+        mkdir openwrt-packages
+        cd openwrt-packages
+        #git clone https://$SCKEY:x-oauth-basic@github.com/OldCoding/luci-app-speedlimit.git
+        # 使用源码自带ShadowSocksR Plus+出国软件 fw876/helloworld
+        #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+        sed -i '$a src-git jerrykuku https://github.com/jerrykuku/luci-app-vssr.git' feeds.conf.default                    #luci-app-vssr <M>
+        #sed -i '$a src-git fw876 https://github.com/fw876/helloworld.git                                                   #luci-app-ssr-plus
+        sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+        sed -i '$a src-git Whitestorys https://github.com/Whitestorys/openwrt-packages' feeds.conf.default
+        sed -i '$a src-git Whitecolor https://github.com/Whitestorys/openwrt-extra-packages.git' feeds.conf.default
+        #sed -i '$a src-git fw876 https://github.com/fw876/helloworld' feeds.conf.default
+   
+    - name: 安装自定义文件路径  FilePatch
       run: |
         # 修改openwrt登陆地址,把下面的172.16.10.1修改成你想要的默认IP就可以了
         sed -i 's/192.168.1.1/172.16.10.1/g' ./package/base-files/files/bin/config_generate
