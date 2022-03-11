@@ -56,10 +56,10 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: 准备结束                          # 1.导入主分支
+    - name: 准备结束  Checkout                          # 1.导入主分支
       uses: actions/checkout@main
 
-    - name: 开始安装编译所需系统                # 2.初始化环境
+    - name: 开始安装编译所需系统  Initialization environment                # 2.初始化环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -72,27 +72,27 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: 下载固件源码
+    - name: 下载固件源码  Clone source code
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         mv openwrt/* . && rm -rf openwrt
 
-    - name: 加载feeds跟自定义插件
+    - name: 加载feeds跟自定义插件  Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
-    - name: 下载feeds
+    - name: 下载feeds  Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: 安装feeds跟自定义插件
+    - name: 安装feeds跟自定义插件  Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: 加载diy.config设置
+    - name: 加载diy.config设置  Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -100,11 +100,11 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-   # - name: SSH远程连接服务器配置固件
+   # - name: SSH远程连接服务器配置固件  SSH connection to Actions
    #   uses: P3TERX/debugger-action@main
    #   if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
-    - name: 下载软件包
+    - name: 下载软件包  Download package
       id: package
       run: |
         cd openwrt
