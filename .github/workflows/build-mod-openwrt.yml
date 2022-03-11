@@ -81,9 +81,9 @@ jobs:
    
     - name: 加载feeds跟自定义插件  Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF feeds.conf.default
         chmod +x $DIY_P1_SH
-        cd openwrt
+        
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: 下载feeds  Update feeds
@@ -97,7 +97,7 @@ jobs:
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
-        cd openwrt
+        
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
    # - name: SSH远程连接服务器配置固件  SSH connection to Actions
@@ -107,7 +107,6 @@ jobs:
     - name: 下载软件包  Download package
       id: package
       run: |
-        cd openwrt
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
