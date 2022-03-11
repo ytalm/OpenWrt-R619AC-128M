@@ -18,8 +18,8 @@ sed -i '$a src-git jerrykuku https://github.com/jerrykuku/luci-app-vssr.git' fee
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld.git                                                   #luci-app-ssr-plus
 
 # Add a feed source
-sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-sed -i '$a src-git Whitestorys https://github.com/Whitestorys/openwrt-packages' feeds.conf.default
+#sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+#sed -i '$a src-git Whitestorys https://github.com/Whitestorys/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git Whitecolor https://github.com/Whitestorys/openwrt-extra-packages.git' feeds.conf.default
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld' feeds.conf.default
 
