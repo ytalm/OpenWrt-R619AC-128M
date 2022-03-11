@@ -91,13 +91,10 @@ jobs:
     - name: 下载feeds  Update feeds
       run: ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    - name: 加载diy.config设置  Load custom configuration
+    - name: 加载config文件设置  Generate configuration file
       run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
-        
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        rm -f ./.config*
+        touch ./.config
 
    # - name: SSH远程连接服务器配置固件  SSH connection to Actions
    #   uses: P3TERX/debugger-action@main
