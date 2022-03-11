@@ -16,6 +16,7 @@ name: 编译Mod OpenWrt固件
 
 on:
   repository_dispatch:
+  workflow_dispatch:
 
 #release发布触发开始编译(只是一个触发条件,不会发布的,又麻烦,没卵用,不用研究) 
   release:
