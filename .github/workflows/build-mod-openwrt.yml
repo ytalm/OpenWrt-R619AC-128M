@@ -113,7 +113,7 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: 开始编译固件
+    - name: 开始编译固件  Compile the firmware
       id: compile
       run: |
         cd openwrt
@@ -124,16 +124,16 @@ jobs:
         [ -s DEVICE_NAME ] && echo "::set-output name=DEVICE_NAME::$(cat DEVICE_NAME)"
         echo "::set-output name=FILE_DATE::$(date +"%Y%m%d%H%M")"
 
-    - name: 检查github储存空间情况
+    - name: 检查github储存空间情况  Check space usage
       if: (!cancelled())
       run: df -hT
       
-    - name: 准备Artifact
+    - name: 准备Artifact  Prepare Artifact
       run: |
           mkdir -p ./new/package
           cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
           
-    - name: 上传bin文件夹(固件+ipk)在github空间
+    - name: 上传bin文件夹(固件+ipk)在github空间  Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
