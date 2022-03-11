@@ -104,6 +104,7 @@ jobs:
     - name: 下载软件包  Download package
       id: package
       run: |
+        cd openwrt
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
