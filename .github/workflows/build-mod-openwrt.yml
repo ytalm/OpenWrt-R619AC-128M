@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: 准备检验  Checkout                          # 1.导入主分支
+    - name: 检验结束  Checkout                          # 1.导入主分支
       uses: actions/checkout@main
 
     - name: 开始安装编译所需系统  Initialization environment                # 2.初始化环境
