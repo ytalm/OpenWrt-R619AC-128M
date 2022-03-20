@@ -12,7 +12,7 @@
 #修改以下代码或者开启触发开关都好，要严格按格式对好,前面有多少空格也要看清楚
 #代码里有 name: 后面的内容随便改,冒号后面是有个空格的,如果修改固件名字就要考虑能不能显示出你想要的
 
-name: Build OpenWrt
+name: 编译Mod OpenWrt固件
 
 on:
   repository_dispatch:
@@ -32,7 +32,7 @@ on:
     branches:                         # 分支
       - master                        # 主分支
     paths:                            # 路径
-      - "my.config"                   # 监听mod.config的push操作
+      - "my.config"                  # 监听mod.config的push操作
 
 #定时触发开始编译(开启定时编译请先关闭SSH,要不然SSH没人管,会卡SSH编译失败)
   schedule:                           # 时间表
@@ -135,13 +135,24 @@ jobs:
     - name: 检查github储存空间情况  Check space usage
       if: (!cancelled())
       run: df -hT
-   
+
+    - name: 准备Artifact
+      run: |
+          mkdir -p ./new/package
+          cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
+
     - name: 加载bin目录在github空间  Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
+ 
+    - name: 上传IPK
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt-Mod-Ipk
+        path: ./new/package
 
     - name: 整理固件文件夹  Organize files
       id: organize
