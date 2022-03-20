@@ -135,6 +135,11 @@ jobs:
     - name: 检查github储存空间情况  Check space usage
       if: (!cancelled())
       run: df -hT
+   
+    - name: 准备Artifact
+      run: |
+          mkdir -p ./new/package
+          cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
 
     - name: 加载bin目录在github空间  Upload bin directory
       uses: actions/upload-artifact@main
@@ -142,6 +147,12 @@ jobs:
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
+
+    - name: 上传IPK
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt-Mod-Ipk
+        path: ./new/package
 
     - name: 整理固件文件夹  Organize files
       id: organize
