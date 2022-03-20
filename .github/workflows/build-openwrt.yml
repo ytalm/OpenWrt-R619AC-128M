@@ -16,7 +16,12 @@ name: Build OpenWrt
 
 on:
   repository_dispatch:
-
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
 #release发布触发开始编译(只是一个触发条件,不会发布的,又麻烦,没卵用,不用研究) 
   release:
     types: published
