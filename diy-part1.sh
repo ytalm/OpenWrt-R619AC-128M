@@ -14,12 +14,12 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-#sed -i '$a src-git Aibx https://github.com/Aibx/OpenWRT-Packages' feeds.conf.default
+sed -i '$a src-git Aibx https://github.com/Aibx/OpenWRT-Packages' feeds.conf.default
 #sed -i '$a src-git Whitecolor https://github.com/Whitestorys/openwrt-extra-packages.git' feeds.conf.default
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #sed -i '$a src-git liuran001_packages https://github.com/liuran001/openwrt-packages' feeds.conf.default
-sed -i '$a src-git 281677160 https://github.com/281677160/openwrt-package' feeds.conf.default
+#sed -i '$a src-git 281677160 https://github.com/281677160/openwrt-package' feeds.conf.default
 #sed -i '$a src-git ytalm https://github.com/ytalm/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld' feeds.conf.default
 #sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall' feeds.conf.default
@@ -40,13 +40,6 @@ sed -i '$a src-git 281677160 https://github.com/281677160/openwrt-package' feeds
 # 全新的[argon-主题]此主题玩法很多,这里看说明【https://github.com/jerrykuku/luci-theme-argon/blob/18.06/README_ZH.md】
 # 用WinSCP连接openwrt，在/www/luci-static/argon里面创建background文件夹（如果本身就有background就不需要创建）来存放jpg png gif格式图片可以自定义登陆界面，gif图片为动态登陆界面
 
-
-#theme_argon='https://github.com/sypopo/luci-theme-argon-mc.git'  # 主题地址
-#openClash_url='https://github.com/vernesong/OpenClash.git'       # OpenClash包地址
-#adguardhome_url='https://github.com/rufengsuixing/luci-app-adguardhome.git' # adguardhome 包地址
-#lienol_url='https://github.com/Lienol/openwrt-package.git'       # Lienol 包地址
-#vssr_url_rely='https://github.com/jerrykuku/lua-maxminddb.git'   # vssr lua-maxminddb依赖
-#vssr_url='https://github.com/jerrykuku/luci-app-vssr.git'        # vssr地址
 
 
 
