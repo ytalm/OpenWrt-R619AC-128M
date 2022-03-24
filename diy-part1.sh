@@ -22,7 +22,7 @@
 sed -i '$a src-git 281677160 https://github.com/281677160/openwrt-package' feeds.conf.default
 #sed -i '$a src-git ytalm https://github.com/ytalm/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld' feeds.conf.default
-sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
+#sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
 
 #内核版本是会随着源码更新而改变的，在coolsnowwolf/lede的源码查看最好，以X86机型为例，源码的target/linux/x86文件夹可以看到有几个内核版本，x86文件夹里Makefile可以查看源码正在使用内核版本
 #修改版本内核（下面两行代码前面有#为源码默认最新5.4内核,没#为4.19内核,默认修改X86的，其他机型L大源码那里target/linux查看，对应修改下面的路径就好）
