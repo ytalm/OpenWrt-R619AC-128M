@@ -20,7 +20,7 @@
 sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #sed -i '$a src-git 281677160 https://github.com/281677160/openwrt-package' feeds.conf.default
-#sed -i '$a src-git ytalm https://github.com/ytalm/openwrt-packages' feeds.conf.default
+sed -i '$a src-git ytalm https://github.com/ytalm/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git fw876 https://github.com/fw876/helloworld' feeds.conf.default
 #sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2' feeds.conf.default
 
