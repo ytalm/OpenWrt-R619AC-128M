@@ -53,7 +53,7 @@ env:
   UPLOAD_FIRMWARE: true                          #上传固件到github空间（true=开启）（false=关闭）
   UPLOAD_COWTRANSFER: false                   #上传固件到到【奶牛快传】（true=开启）（false=关闭）   
   UPLOAD_WETRANSFER: true                       #上传固件到到【WETRANSFER】（true=开启）（false=关闭）
-  UPLOAD_RELEASE: false
+  UPLOAD_RELEASE: true
   TZ: Asia/Shanghai                                  #时区 亚洲/上海
 
 jobs:
