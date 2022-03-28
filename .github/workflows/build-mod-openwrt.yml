@@ -61,7 +61,8 @@ env:
   UPLOAD_ARTIFACTS: false                            # 上传固件到 Github Artifacts
   UPLOAD_BIN_ARTIFACTS: false                        # 上传 bin 文件夹到 Github Artifacts
   DELETE_USELESS_FILES: true                         # 删除无用文件以增加编译空间
-  DELETE_OLD_WORKFLOW: true                          # 删除早期的 workflow 任务
+  DELETE_OLD_WORKFLOW: false                         # 删除早期的 workflow 任务
+  DELETE_OLD_RELEASE: false                          # 删除早期的 Releases 任务
   TZ: Asia/Shanghai                                  #时区 亚洲/上海
 ### 结束
 
@@ -219,13 +220,14 @@ jobs:
 
     - name: 删除旧的工作流  Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
+      if: env.DELETE_OLD_WORKFLOW == 'true' && !cancelled()
       with:
         retain_days: 1
         keep_minimum_runs: 3
 
     - name: 删除旧的发布版本  Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: env.DELETE_OLD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 3
         delete_tags: true
