@@ -150,6 +150,12 @@ jobs:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
+    - name: 上传IPK
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt-Mod-Ipk
+        path: ./new/package
+
     - name: 整理固件文件夹  Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
@@ -165,12 +171,6 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
-    - name: 上传IPK
-      uses: actions/upload-artifact@main
-      with:
-        name: OpenWrt-Mod-Ipk
-        path: ./new/package
 
     - name: 上传固件到奶牛快传  Upload firmware to cowtransfer
       id: cowtransfer
