@@ -143,6 +143,11 @@ jobs:
       if: (!cancelled())
       run: df -hT
    
+    - name: 准备Artifact
+      run: |
+          mkdir -p ./new/package
+          cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
+
     - name: 加载bin目录在github空间  Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
