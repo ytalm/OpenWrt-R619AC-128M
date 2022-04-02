@@ -134,11 +134,20 @@ jobs:
           mkdir -p ./artifact/
           find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./artifact/
           find openwrt/bin/targets/ -name "*uefi*img*" | xargs -i mv -f {} ./artifact/
-    - name: 上传固件
-      uses: actions/upload-artifact@master
+    
+    - name: 上传BIN目录
+      uses: actions/upload-artifact@main
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_firmware
-        path: ./artifact/
+        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: openwrt/bin
+    
+    - name: 上传固件
+      uses: actions/upload-artifact@main
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
     
     - name: 加载固件到WeTransfer  Upload firmware to WeTransfer
       id: wetransfer
