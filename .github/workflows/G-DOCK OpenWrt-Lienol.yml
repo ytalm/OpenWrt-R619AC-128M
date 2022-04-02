@@ -126,13 +126,6 @@ jobs:
           mkdir -p ./new/package
           cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
     
-    - name: 上传BIN目录
-      uses: actions/upload-artifact@master
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin
-        path: openwrt/bin
-
     - name: 整理文件
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
