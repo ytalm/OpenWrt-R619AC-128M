@@ -122,34 +122,35 @@ jobs:
         make -j$(nproc) || make -j1 V=s
         echo "::set-output name=status::success"
     
+    - name: 检查github储存空间情况  Check space usage
+      if: (!cancelled())
+      run: df -hT
+
     - name: 准备Artifact
       run: |
           mkdir -p ./new/package
           cp -rf $(find ./openwrt/bin -type f -name "*.ipk") ./new/package
-    
-    - name: 整理文件
+    - name: 上传IPK
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt-Mod-Ipk
+        path: ./new/package
+
+    - name: 整理固件文件夹  Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-          rm -rf ./artifact/
-          mkdir -p ./artifact/
-          find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./artifact/
-          find openwrt/bin/targets/ -name "*uefi*img*" | xargs -i mv -f {} ./artifact/
-    
-    - name: 上传BIN目录
-      uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
-    
-    - name: 上传固件
+        cd openwrt/bin/targets/*/*
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "::set-output name=status::success"
+    - name: 加载固件在github空间  Upload firmware directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-    
+
     - name: 加载固件到WeTransfer  Upload firmware to WeTransfer
       id: wetransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
@@ -158,7 +159,6 @@ jobs:
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
-        
     - name: 删除旧的工作流  Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
