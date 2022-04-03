@@ -24,27 +24,9 @@ on:
   schedule:
     - cron: 0 4 28 * *
 
-# release触发
-  release:
-    types: [published]
-
 # 点赞触发
   watch:
     types: [started]
-
-# 编辑触发
-#  push:
-#    branches: 
-#      - master
-
-# config触发
-#  paths:
-#    - 'my.config'
-
-#FREE_UP_DISK 释放磁盘空间
-#SSH_ACTIONS 开启SSH连接
-#UPLOAD_BIN_DIR上传BIN目录
-#UPLOAD_FIRMWARE上传固件目录
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt.git
@@ -75,7 +57,7 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-latest)
+        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
