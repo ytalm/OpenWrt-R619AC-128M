@@ -35,7 +35,7 @@ on:
 # 编辑触发
 #  push:
 #    branches: 
-#      - main
+#      - master
 
 # config触发
 #  paths:
@@ -48,7 +48,7 @@ on:
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: main
+  REPO_BRANCH: master
   DIY_SH: G-DOCK-Lienol.sh
   FREE_UP_DISK: false
   SSH_ACTIONS: false
