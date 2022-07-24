@@ -64,7 +64,7 @@ env:
  
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: 检验结束  Checkout                          # 1.导入主分支
