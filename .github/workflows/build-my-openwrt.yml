@@ -56,7 +56,7 @@ env:
   UPLOAD_BIN_DIR: true                               #上传【bin文件夹】到github空间（true=开启）（false=关闭）
   UPLOAD_FIRMWARE: true                          #上传固件到github空间（true=开启）（false=关闭）
   UPLOAD_COWTRANSFER: false                   #上传固件到到【奶牛快传】（true=开启）（false=关闭）   
-  UPLOAD_WETRANSFER: true                       #上传固件到到【WETRANSFER】（true=开启）（false=关闭）
+  UPLOAD_WETRANSFER: false                       #上传固件到到【WETRANSFER】（true=开启）（false=关闭）
   UPLOAD_RELEASE: false                              # 上传固件到 Github Releases
   DELETE_OLD_WORKFLOW: true                         # 删除早期的 workflow 任务
   DELETE_OLD_RELEASE: true                           # 删除早期的 Releases 任务
